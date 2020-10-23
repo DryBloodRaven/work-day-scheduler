@@ -5,3 +5,6 @@
 // Loop over all boxes and conditionally decide what color they need to boxes
 
 // Set up localStorage
+
+var date = $("#currentDay").textContent = moment().format("dddd MMMM, Do");
+$("#currentDay").append(date);
