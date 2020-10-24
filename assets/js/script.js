@@ -1,30 +1,28 @@
-// Make HTML have columns and rows correspond to certain times
+// Declared variables
+var now = moment();
+var tasks = [];
 
-// Only 1 Function needs to register what time it is
-
-// Loop over all boxes and conditionally decide what color they need to boxes
-
-// Set up localStorage
-
-var tasks = {};
-
+//  Add Date at top of the page
 var dateToday = $("#currentDay").textContent = moment().format("dddd MMMM, Do");
 $("#currentDay").append(dateToday);
 
-// var loadTasks = function() {
-//     tasks = JSON.parse(localStorage.getItem("tasks"));
+// Save button function to update text box
+$(".saveBtn").on("click", function(event) {
 
-//     if (!tasks) {
-//         tasks = {
-//             toDo: []
-//         };
-//     }
+});
 
-//     $.each(tasks, function(list, arr) {
-//         arr.forEach(function(task))
-//     })
-// };
+$(".time-block").each(function() {
+    $(this).find(".input").val(tasks[$(this).attr("data-time")].value);
+});
 
-var saveTasks = function() {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-};
+$.each($(".time-block"), function (index, value) {
+    var hour = $(value).attr("data-time");
+    if (Number(hour) === now.hour()) {
+        $(this).find("textarea").addClass("present");
+    } else if (Number(hour) < now.hour()) {
+        $(this).find("textarea").addClass("past");
+    }
+    else {
+        $(this).find("textarea").addClass("future");
+    }
+});
