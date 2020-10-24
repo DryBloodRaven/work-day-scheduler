@@ -1,33 +1,30 @@
 // Declared variables
 var now = moment();
-var tasks = [];
+var tasks = JSON.parse(localStorage.getItem("taskList")) || [];
+
 
 //  Add Date at top of the page
 var dateToday = $("#currentDay").textContent = moment().format("dddd MMMM, Do");
 $("#currentDay").append(dateToday);
 
-// load tasks
-// var loadtasks = function() {
-//     tasks = JSON.parse(localStorage.getItem("tasks"));
+// render tasks back into the schedular
+function renderTasks() {
+    for (var i = 0; i < tasks.length; i++) {
 
-//     if (!tasks) {
-//         tasks = {
-//             "9": [ time: "9", value: ""],
-//             "10": [ time: "10", value: ""],
-//             "11": [ time: "11", value: ""],
-//             "12": [ time: "12", value: ""],
-//             "13": [ time: "13", value: ""],
-//             "14": [ time: "14", value: ""],
-//             "15": [ time: "15", value: ""],
-//             "16": [ time: "16", value: ""],
-//             "17": [ time: "17", value: ""]
-//         };
-//     }
-// }
+        $(".textInput").val(tasks);
+    }
+};
 
 // Save button function to update text box
 $(".saveBtn").on("click", function(event) {
+    event.preventDefault();
 
+    var task = $(this).siblings("textarea")
+        .val();
+
+    tasks.push(task);
+
+    localStorage.setItem("taskList", JSON.stringify(tasks));
 });
 
 
@@ -43,3 +40,5 @@ $.each($(".time-block"), function (index, value) {
         $(this).find("textarea").addClass("future");
     }
 });
+
+renderTasks();
