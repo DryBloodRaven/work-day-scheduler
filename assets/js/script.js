@@ -6,5 +6,25 @@
 
 // Set up localStorage
 
-var date = $("#currentDay").textContent = moment().format("dddd MMMM, Do");
-$("#currentDay").append(date);
+var tasks = {};
+
+var dateToday = $("#currentDay").textContent = moment().format("dddd MMMM, Do");
+$("#currentDay").append(dateToday);
+
+// var loadTasks = function() {
+//     tasks = JSON.parse(localStorage.getItem("tasks"));
+
+//     if (!tasks) {
+//         tasks = {
+//             toDo: []
+//         };
+//     }
+
+//     $.each(tasks, function(list, arr) {
+//         arr.forEach(function(task))
+//     })
+// };
+
+var saveTasks = function() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+};
